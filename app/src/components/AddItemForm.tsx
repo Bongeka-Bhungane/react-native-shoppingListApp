@@ -44,7 +44,7 @@ export default function AddItemForm({ onAddItem }: AddItemFormProps) {
     >
       <View style={styles.inputContainer}>
         <TextInput
-          style={[styles.input, styles.nameInput]}
+          style={[styles.input, styles.nameInput, { color: "#ffffffff" }]}
           placeholder="Item name"
           value={name}
           onChangeText={(text) => {
@@ -100,16 +100,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: 16,
-    backgroundColor: "#f9fafb",
+    backgroundColor: "#9A8FD3",
+    color: "#f1f4f8ff",
   },
   nameInput: {
     flex: 1,
+    color: "#f1f4f8ff",
   },
   quantityInput: {
     width: 70,
+    color: "#f1f4f8ff",
   },
   addButton: {
-    backgroundColor: "#3b82f6",
+    backgroundColor: "#9A8FD3",
     borderRadius: 8,
     width: 48,
     justifyContent: "center",

@@ -169,12 +169,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: "#1f2937",
+    color: "#5e519cff",
     marginBottom: 4,
   },
   stats: {
     fontSize: 14,
-    color: "#6b7280",
+    color: "#9A8FD3",
   },
   listContent: {
     paddingVertical: 8,
@@ -188,11 +188,11 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#6b7280",
+    color: "#5e519cff",
     marginBottom: 8,
   },
   emptySubtext: {
     fontSize: 14,
-    color: "#9ca3af",
+    color: "#9A8FD3",
   },
 });

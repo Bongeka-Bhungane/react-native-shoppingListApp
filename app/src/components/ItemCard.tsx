@@ -33,9 +33,9 @@ export default function ItemCard({
         accessibilityState={{ checked: purchased }}
       >
         {purchased ? (
-          <Ionicons name="checkbox" size={24} color="#10b981" />
+          <Ionicons name="checkbox" size={24} color="#9a8fd3" />
         ) : (
-          <Ionicons name="square-outline" size={24} color="#6b7280" />
+          <Ionicons name="square-outline" size={24} color="#5e519cff" />
         )}
       </Pressable>
 
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     marginRight: 12,
+    borderColor: "#5e519cff",
   },
   contentContainer: {
     flex: 1,
@@ -92,16 +93,16 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#1f2937",
+    color: "#5e519cff",
     marginBottom: 4,
   },
   purchasedText: {
     textDecorationLine: "line-through",
-    color: "#9ca3af",
+    color: "#9288c9",
   },
   quantity: {
     fontSize: 14,
-    color: "#6b7280",
+    color: "#b896d4ff",
   },
   actionsContainer: {
     flexDirection: "row",
