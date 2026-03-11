@@ -1,50 +1,81 @@
-# Welcome to your Expo app 👋
+<img src="https://socialify.git.ci/Bongeka-Bhungane/react-native-shoppingListApp/image?description=1&font=Raleway&language=1&name=1&owner=1&pattern=Circuit+Board&theme=Light" alt="react-native-shoppingListApp" width="640" height="320" />
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# React Native Shopping List App
+## Overview
 
-## Get started
+This is a React Native Shopping List App built using Redux for state management. It allows users to add, edit, delete, and mark items as purchased. The app also includes a search feature and persistent storage using AsyncStorage so your shopping list is saved between sessions.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+* Add new items with name and quantity
 
-2. Start the app
+* Edit existing items
 
-   ```bash
-   npx expo start
-   ```
+* Delete items from the list
 
-In the output, you'll find options to open the app in a
+* Mark items as purchased using checkboxes
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* Search items by name in real-time
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+* Persistent storage with AsyncStorage
 
-## Get a fresh project
+* Responsive and user-friendly interface
 
-When you're ready, run:
+## Installation
 
-```bash
-npm run reset-project
+Clone the repository:
 ```
+git clone https://github.com/Bongeka-Bhungane/react-native-shoppingListApp
+cd react-native-shopping-list
+```
+Install dependencies:
+```
+npm install
+# or
+yarn install
+```
+Start the app:
+```
+npx react-native run-android
+# or
+npx react-native run-ios
+```
+## Redux State Management
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The app uses Redux Toolkit to manage the shopping list state.
 
-## Learn more
+## Actions
 
-To learn more about developing your project with Expo, look at the following resources:
+* addItem({ name, quantity }) – Add a new item
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+* editItem({ id, name, quantity }) – Edit an existing item
 
-## Join the community
+* deleteItem(id) – Delete an item
 
-Join our community of developers creating universal apps.
+* togglePurchased(id) – Toggle purchased status
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+* setItems(items) – Load items from storage
+
+* setSearchQuery(query) – Update the search filter
+
+## Persistence
+
+The shopping list data is stored in AsyncStorage under the key @shopping_list_items. The app loads saved items when reopened and saves any changes automatically.
+
+## Usage
+
+1. Open the app and see the shopping list.
+
+2. Use the Add Item form to add new items with name and quantity.
+
+3. Tap the checkbox to mark items as purchased.
+
+4. Tap edit to change the name or quantity.
+
+5. Tap delete to remove an item.
+
+6. Use the search bar to filter items by name.
+
+## Author
+
+Bongeka Bhungane – Full Stack Developer in training
