@@ -174,6 +174,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f3f4f6",
+    borderColor: "#5e519cff",
+    borderRadius: 20,
   },
   header: {
     backgroundColor: "#ffffff",
