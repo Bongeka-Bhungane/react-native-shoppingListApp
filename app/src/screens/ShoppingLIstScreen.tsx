@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RootState } from "../redux/store";
+import { RootState, AppDispatch } from "../redux/store";
 import {
   addItem,
   editItem,
@@ -29,7 +29,7 @@ export default function ShoppingListScreen() {
     (state: RootState) => state.shoppingList,
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [editingItem, setEditingItem] = useState<{
     id: string;
@@ -39,33 +39,35 @@ export default function ShoppingListScreen() {
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
+  // Load items from AsyncStorage
   useEffect(() => {
-    loadItems();
-  }, []);
+    const loadItems = async () => {
+      try {
+        const savedItems = await AsyncStorage.getItem(STORAGE_KEY);
+        if (savedItems) {
+          const parsedItems = JSON.parse(savedItems);
+          dispatch(setItems(parsedItems));
+        }
+      } catch (error) {
+        console.error("Error loading items:", error);
+      }
+    };
 
+    loadItems();
+  }, [dispatch]);
+
+  // Save items to AsyncStorage whenever they change
   useEffect(() => {
+    const saveItems = async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      } catch (error) {
+        console.error("Error saving items:", error);
+      }
+    };
+
     saveItems();
   }, [items]);
-
-  const loadItems = async () => {
-    try {
-      const savedItems = await AsyncStorage.getItem(STORAGE_KEY);
-      if (savedItems) {
-        const parsedItems = JSON.parse(savedItems);
-        dispatch(setItems(parsedItems));
-      }
-    } catch (error) {
-      console.error("Error loading items:", error);
-    }
-  };
-
-  const saveItems = async () => {
-    try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    } catch (error) {
-      console.error("Error saving items:", error);
-    }
-  };
 
   const handleAddItem = (name: string, quantity: number) => {
     dispatch(addItem({ name, quantity }));

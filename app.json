@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/shoppinglistSplash.jpg"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.bongeka.ShoppingListApp"
     },
     "web": {
       "output": "static",
@@ -43,6 +44,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "5fb3be9b-b614-43ca-b888-1319cd33870e"
+      }
     }
   }
 }
