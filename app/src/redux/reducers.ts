@@ -9,10 +9,12 @@ interface Item {
 
 interface ShoppingListState {
   items: Item[];
+  searchQuery: string;
 }
 
 const initialState: ShoppingListState = {
   items: [],
+  searchQuery: "",
 };
 
 const shoppingListSlice = createSlice({
@@ -21,7 +23,7 @@ const shoppingListSlice = createSlice({
   reducers: {
     addItem: (
       state,
-      action: PayloadAction<{ name: string; quantity: number }>
+      action: PayloadAction<{ name: string; quantity: number }>,
     ) => {
       state.items.push({
         id: Date.now().toString(),
@@ -30,9 +32,10 @@ const shoppingListSlice = createSlice({
         purchased: false,
       });
     },
+
     editItem: (
       state,
-      action: PayloadAction<{ id: string; name: string; quantity: number }>
+      action: PayloadAction<{ id: string; name: string; quantity: number }>,
     ) => {
       const item = state.items.find((i) => i.id === action.payload.id);
       if (item) {
@@ -40,19 +43,34 @@ const shoppingListSlice = createSlice({
         item.quantity = action.payload.quantity;
       }
     },
+
     deleteItem: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
     },
+
     togglePurchased: (state, action: PayloadAction<string>) => {
       const item = state.items.find((i) => i.id === action.payload);
       if (item) item.purchased = !item.purchased;
     },
+
     setItems: (state, action: PayloadAction<Item[]>) => {
       state.items = action.payload;
+    },
+
+    // Search functionality
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload;
     },
   },
 });
 
-export const { addItem, editItem, deleteItem, togglePurchased, setItems } =
-  shoppingListSlice.actions;
+export const {
+  addItem,
+  editItem,
+  deleteItem,
+  togglePurchased,
+  setItems,
+  setSearchQuery,
+} = shoppingListSlice.actions;
+
 export default shoppingListSlice.reducer;

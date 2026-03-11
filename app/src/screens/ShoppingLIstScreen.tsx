@@ -20,17 +20,23 @@ import {
 import ItemCard from "../components/ItemCard";
 import AddItemForm from "../components/AddItemForm";
 import EditItemModal from "../components/EditItemModal";
+import SearchBar from "../components/SearchBar";
 
 const STORAGE_KEY = "@shopping_list_items";
 
 export default function ShoppingListScreen() {
-  const items = useSelector((state: RootState) => state.shoppingList.items);
+  const { items, searchQuery } = useSelector(
+    (state: RootState) => state.shoppingList,
+  );
+
   const dispatch = useDispatch();
+
   const [editingItem, setEditingItem] = useState<{
     id: string;
     name: string;
     quantity: number;
   } | null>(null);
+
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
   useEffect(() => {
@@ -68,7 +74,11 @@ export default function ShoppingListScreen() {
   const handleEditItem = (id: string) => {
     const item = items.find((i) => i.id === id);
     if (item) {
-      setEditingItem({ id: item.id, name: item.name, quantity: item.quantity });
+      setEditingItem({
+        id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+      });
       setIsEditModalVisible(true);
     }
   };
@@ -91,7 +101,7 @@ export default function ShoppingListScreen() {
           style: "destructive",
           onPress: () => dispatch(deleteItem(id)),
         },
-      ]
+      ],
     );
   };
 
@@ -101,6 +111,10 @@ export default function ShoppingListScreen() {
 
   const purchasedCount = items.filter((item) => item.purchased).length;
   const totalCount = items.length;
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,18 +127,20 @@ export default function ShoppingListScreen() {
         )}
       </View>
 
+      <SearchBar />
+
       <AddItemForm onAddItem={handleAddItem} />
 
-      {items.length === 0 ? (
+      {filteredItems.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>Your shopping list is empty</Text>
+          <Text style={styles.emptyText}>No items found</Text>
           <Text style={styles.emptySubtext}>
-            Add items using the form above
+            Try searching for something else
           </Text>
         </View>
       ) : (
         <FlatList
-          data={items}
+          data={filteredItems}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <ItemCard
